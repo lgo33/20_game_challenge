@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkpbxjrkl7naq"]
+
+[ext_resource type="Script" path="res://pong/player_a.gd" id="1_j806t"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ncjjf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vlhna"]
+size = Vector2(10, 70)
+
+[node name="PlayerA" type="CharacterBody2D"]
+script = ExtResource("1_j806t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(10, 70)
+texture = SubResource("CanvasTexture_ncjjf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vlhna")
