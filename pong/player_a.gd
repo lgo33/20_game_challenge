@@ -18,5 +18,5 @@ func _process(delta):
 	if Input.is_action_pressed("Player A DOWN"):
 		target_velocity += Vector2.DOWN * speed
 
-	velocity = lerp(velocity, target_velocity, delta*5)
+	velocity = lerp(velocity, target_velocity, delta*10)
 	move_and_collide(velocity*delta)

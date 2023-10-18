@@ -4,16 +4,18 @@ var speed: int = 400
 var rng = RandomNumberGenerator.new()
 var direction: Vector2 = Vector2.ZERO
 
+@onready var short_blip_sound: AudioStreamPlayer = $ShortBlipSound
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	init()
-	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 #	velocity = direction * speed
 	var collision = move_and_collide(velocity*delta)
 	if collision: 
+		short_blip_sound.play()
 		var collider = collision.get_collider()
 		if collider is CharacterBody2D:
 			velocity.y += collider.velocity.y / 3
