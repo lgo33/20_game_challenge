@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://beegvnw1ke6xy"]
+[gd_scene load_steps=11 format=3 uid="uid://beegvnw1ke6xy"]
 
 [ext_resource type="Script" path="res://flappy_bird/world.gd" id="1_2ohwi"]
 [ext_resource type="PackedScene" uid="uid://c603ajh1ktr0u" path="res://flappy_bird/plane.tscn" id="1_5dh7s"]
@@ -6,6 +6,16 @@
 [ext_resource type="Script" path="res://flappy_bird/ParallaxBackground.gd" id="3_5tccj"]
 [ext_resource type="Texture2D" uid="uid://b7kctdacbj18l" path="res://flappy_bird/assets/groundGrass.png" id="5_613tc"]
 [ext_resource type="Script" path="res://flappy_bird/ParallaxGround.gd" id="5_i858m"]
+[ext_resource type="FontFile" uid="uid://cm5oe5k1oc4q6" path="res://flappy_bird/assets/kenvector_future.ttf" id="7_5x1yq"]
+[ext_resource type="Script" path="res://flappy_bird/CrashedLabel.gd" id="8_xdeid"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_u0r2k"]
+font = ExtResource("7_5x1yq")
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_5caxc"]
+font = ExtResource("7_5x1yq")
+font_size = 64
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_2ohwi")
@@ -54,4 +64,28 @@ region_rect = Rect2(0, 0, 1616, 72)
 position = Vector2(809, 612)
 polygon = PackedVector2Array(-44, -10, -35, -8, 0, -1, 34.5219, -2.66085, 41, 6, 90, 8, 135, -4, 157, -29, 249, -32, 308, -10, 344, -8, 344, 35, 2, 36, -808, 36, -808, -1, -792, -1, -774, -2, -767, 5, -718, 9, -674, -2, -652, -29, -560, -32, -500, -10, -459, -9, -435, -24, -372, -24, -338, 8, -299, 8, -274, 18, -236, 18, -207.2, -13, -172, -13, -150, -33, -63, -36)
 
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = 130.0
+offset_top = 13.0
+offset_right = 203.0
+offset_bottom = 91.0
+text = "0"
+label_settings = SubResource("LabelSettings_u0r2k")
+horizontal_alignment = 1
+
+[node name="CrashedLabel" type="Label" parent="."]
+process_mode = 3
+visible = false
+offset_left = 370.0
+offset_top = 188.0
+offset_right = 925.0
+offset_bottom = 350.0
+text = "crashed
+"
+label_settings = SubResource("LabelSettings_5caxc")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("8_xdeid")
+
+[connection signal="crashed" from="Plane" to="." method="_on_plane_crashed"]
 [connection signal="timeout" from="ObstacleTimer" to="." method="_on_obstacle_timer_timeout"]

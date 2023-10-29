@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+signal crashed(collision)
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
@@ -24,3 +25,4 @@ func _physics_process(delta: float) -> void:
 	var collision = move_and_collide(velocity * delta)
 	if collision:
 		print(collision)
+		crashed.emit(collision)
