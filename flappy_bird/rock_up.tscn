@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bufxhatneabox"]
+
+[ext_resource type="Script" path="res://flappy_bird/rock_up.gd" id="1_fkx48"]
+[ext_resource type="Texture2D" uid="uid://cp75anrjhmwsn" path="res://flappy_bird/assets/rock.png" id="1_hak2q"]
+
+[node name="RockUp" type="StaticBody2D"]
+script = ExtResource("1_fkx48")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -122)
+polygon = PackedVector2Array(21, -112.5, 30.8, -24.5, 38, -16.2, 38, -7.5, 44.8, 50.5, 52, 63, 52, 71.2, 54, 82.8, 54, 119.5, -54, 119.5, -54, 101.6, -30.5, 10.5, -28.9, 10.5, -21, 0.800003, -21, -3.7, 4, -118.9, 4, -119.5, 21, -119.5)
+
+[node name="Rock" type="Sprite2D" parent="."]
+position = Vector2(0, -122)
+texture = ExtResource("1_hak2q")

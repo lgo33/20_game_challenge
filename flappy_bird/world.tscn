@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://beegvnw1ke6xy"]
+
+[ext_resource type="Script" path="res://flappy_bird/world.gd" id="1_2ohwi"]
+[ext_resource type="PackedScene" uid="uid://c603ajh1ktr0u" path="res://flappy_bird/plane.tscn" id="1_5dh7s"]
+[ext_resource type="Texture2D" uid="uid://b2auhfp4kh00r" path="res://flappy_bird/assets/background.png" id="2_cjfwq"]
+[ext_resource type="Script" path="res://flappy_bird/ParallaxBackground.gd" id="3_5tccj"]
+[ext_resource type="Texture2D" uid="uid://b7kctdacbj18l" path="res://flappy_bird/assets/groundGrass.png" id="5_613tc"]
+[ext_resource type="Script" path="res://flappy_bird/ParallaxGround.gd" id="5_i858m"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_2ohwi")
+
+[node name="Plane" parent="." instance=ExtResource("1_5dh7s")]
+position = Vector2(174, 335)
+
+[node name="ObstacleTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="RocksContainer" type="Node" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_offset = Vector2(-250, 0)
+scroll_ignore_camera_zoom = true
+script = ExtResource("3_5tccj")
+
+[node name="FarDistance" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.3, 1)
+motion_mirroring = Vector2(1140, 0)
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/FarDistance"]
+position = Vector2(574, 323)
+scale = Vector2(1.43875, 1.34167)
+texture = ExtResource("2_cjfwq")
+
+[node name="ParallaxGround" type="ParallaxBackground" parent="."]
+layer = 1
+script = ExtResource("5_i858m")
+
+[node name="Ground" type="ParallaxLayer" parent="ParallaxGround"]
+z_index = 100
+motion_mirroring = Vector2(1616, 0)
+
+[node name="GroundGrass" type="Sprite2D" parent="ParallaxGround/Ground"]
+texture_repeat = 2
+position = Vector2(809, 612)
+texture = ExtResource("5_613tc")
+region_enabled = true
+region_rect = Rect2(0, 0, 1616, 72)
+
+[node name="Area2D" type="StaticBody2D" parent="ParallaxGround/Ground"]
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="ParallaxGround/Ground/Area2D"]
+position = Vector2(809, 612)
+polygon = PackedVector2Array(-44, -10, -35, -8, 0, -1, 34.5219, -2.66085, 41, 6, 90, 8, 135, -4, 157, -29, 249, -32, 308, -10, 344, -8, 344, 35, 2, 36, -808, 36, -808, -1, -792, -1, -774, -2, -767, 5, -718, 9, -674, -2, -652, -29, -560, -32, -500, -10, -459, -9, -435, -24, -372, -24, -338, 8, -299, 8, -274, 18, -236, 18, -207.2, -13, -172, -13, -150, -33, -63, -36)
+
+[connection signal="timeout" from="ObstacleTimer" to="." method="_on_obstacle_timer_timeout"]
