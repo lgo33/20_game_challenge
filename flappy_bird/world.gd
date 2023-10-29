@@ -2,6 +2,7 @@ extends Node2D
 
 var RockUp: PackedScene = preload("res://flappy_bird/rock_up.tscn")
 var num_rock := 0
+var rock_height := 239
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,13 +15,17 @@ func _process(_delta: float) -> void:
 		get_tree().quit() 
 
 func _on_obstacle_timer_timeout() -> void:
-	var rock := RockUp.instantiate()
-	if (num_rock % 2):
-		rock.position.y = 0
-		rock.scale.y = -1
-	else:
-		rock.position.y = 648
-	rock.scale.y *= randf_range(0.5, 1.5)
-	num_rock += 1
-	rock.position.x = 1200
-	$RocksContainer.add_child(rock)
+	var rock_up := RockUp.instantiate()
+	var rock_down := RockUp.instantiate()
+	rock_down.position.y = -10
+	rock_up.position.y = 660
+	var gap := randf_range(-0.6, 0.6)
+	rock_up.scale.y = 1 + gap
+	
+	rock_down.scale.y = -(1 - gap)
+	
+	rock_up.position.x = 1200
+	rock_down.position.x = 1200
+	
+	$RocksContainer.add_child(rock_up)
+	$RocksContainer.add_child(rock_down)
