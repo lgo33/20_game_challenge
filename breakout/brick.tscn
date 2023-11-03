@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0qp0kivbymnp"]
+
+[ext_resource type="Script" path="res://breakout/brick.gd" id="1_4s87s"]
+[ext_resource type="Script" path="res://breakout/Polygon2D.gd" id="2_cakot"]
+
+[node name="Brick" type="StaticBody2D"]
+script = ExtResource("1_4s87s")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-30, -8, 30, -8, 30, 8, -30, 8)
+script = ExtResource("2_cakot")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(30, -8, 30, 8, -30, 8, -30, -8)

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq6frxatfsa4q"]
+
+[ext_resource type="Script" path="res://breakout/BreakoutPlayer.gd" id="1_6o5ay"]
+[ext_resource type="Script" path="res://breakout/Polygon2D.gd" id="1_6t3nl"]
+
+[node name="BreakoutPlayer" type="CharacterBody2D"]
+script = ExtResource("1_6o5ay")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-50, -12, 50, -12, 75, 0, 50, 12, -50, 12, -75, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(1, 0.309804, 0.0431373, 1)
+polygon = PackedVector2Array(-50, -12, 50, -12, 75, 0, 50, 12, -50, 12, -75, 0, -50, -12)
+script = ExtResource("1_6t3nl")

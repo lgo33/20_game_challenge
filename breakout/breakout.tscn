@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5or8g0h0s2vl"]
+
+[ext_resource type="Script" path="res://breakout/breakout.gd" id="1_loeyw"]
+[ext_resource type="PackedScene" uid="uid://dq6frxatfsa4q" path="res://breakout/player.tscn" id="1_o2f12"]
+[ext_resource type="PackedScene" uid="uid://dyw8aa2lc7eam" path="res://breakout/bo_ball.tscn" id="3_ybupd"]
+[ext_resource type="FontFile" uid="uid://cm5oe5k1oc4q6" path="res://flappy_bird/assets/kenvector_future.ttf" id="4_nycy1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gtrh4"]
+font = ExtResource("4_nycy1")
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_f48yb"]
+font = ExtResource("4_nycy1")
+font_size = 48
+
+[node name="Breakout" type="Node2D"]
+script = ExtResource("1_loeyw")
+metadata/_edit_horizontal_guides_ = [648.0, 0.0]
+metadata/_edit_vertical_guides_ = [0.0, 1152.0]
+
+[node name="Player" parent="." instance=ExtResource("1_o2f12")]
+position = Vector2(550, 600)
+
+[node name="Borders" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Borders"]
+polygon = PackedVector2Array(16, 648, 16, 16, 1136, 16, 1136, 648, 1168, 648, 1168, -16, -16, -16, -16, 648)
+
+[node name="Polygon2D" type="Polygon2D" parent="Borders"]
+color = Color(0.478431, 1, 1, 1)
+polygon = PackedVector2Array(16, 648, 16, 16, 1136, 16, 1136, 648, 1168, 648, 1168, -16, -16, -16, -16, 648)
+
+[node name="TopLeft" type="Marker2D" parent="."]
+position = Vector2(50, 65)
+
+[node name="BottomRight" type="Marker2D" parent="."]
+position = Vector2(1088, 320)
+
+[node name="BOBall" parent="." instance=ExtResource("3_ybupd")]
+position = Vector2(552, 480)
+scale = Vector2(0.6, 0.6)
+
+[node name="Bricks" type="Node2D" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = 896.0
+offset_top = 16.0
+offset_right = 1136.0
+offset_bottom = 73.0
+text = "0"
+label_settings = SubResource("LabelSettings_gtrh4")
+horizontal_alignment = 2
+
+[node name="LifeLabel" type="Label" parent="."]
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 136.0
+offset_bottom = 73.0
+text = "3"
+label_settings = SubResource("LabelSettings_f48yb")
