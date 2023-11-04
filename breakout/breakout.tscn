@@ -36,7 +36,9 @@ position = Vector2(50, 65)
 [node name="BottomRight" type="Marker2D" parent="."]
 position = Vector2(1088, 320)
 
-[node name="BOBall" parent="." instance=ExtResource("3_ybupd")]
+[node name="BallContainer" type="Node" parent="."]
+
+[node name="BOBall" parent="BallContainer" instance=ExtResource("3_ybupd")]
 position = Vector2(552, 480)
 scale = Vector2(0.6, 0.6)
 

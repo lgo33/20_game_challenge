@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dyw8aa2lc7eam"]
+[gd_scene load_steps=7 format=3 uid="uid://dyw8aa2lc7eam"]
 
 [ext_resource type="Texture2D" uid="uid://rdi0nvj73o0j" path="res://breakout/assets/ball.png" id="1_2o0w1"]
 [ext_resource type="Script" path="res://breakout/bo_ball.gd" id="1_fdr4n"]
 [ext_resource type="Texture2D" uid="uid://25eih1bvo5wa" path="res://breakout/assets/normal_map_ball_32x32.png" id="2_ojjfh"]
+[ext_resource type="AudioStream" uid="uid://bcfdmadkfrv8h" path="res://shared_assets/short_blip2.wav" id="4_ak21s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y6pfl"]
 radius = 16.7631
@@ -21,3 +22,6 @@ shape = SubResource("CircleShape2D_y6pfl")
 
 [node name="BallSprite" type="Sprite2D" parent="."]
 texture = SubResource("CanvasTexture_1pcfm")
+
+[node name="blip" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ak21s")

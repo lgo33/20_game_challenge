@@ -12,7 +12,10 @@ func _ready() -> void:
 
 func destroy() -> void:
 	destroyed.emit(value)
-	queue_free()
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "scale", Vector2(0.2, 0.2), 0.3)
+	tween.parallel().tween_property(self, "modulate:a", 0., 0.3)
+	tween.tween_callback(queue_free)
 
 func get_shape() -> Vector2:
 	var _minx := 0.0

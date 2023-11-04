@@ -1,8 +1,11 @@
 extends Node2D
 
 var Brick: PackedScene = preload("res://breakout/brick.tscn")
+var Ball: PackedScene = preload("res://breakout/bo_ball.tscn")
+
 var gap := 10.0
 var brick_size := Vector2(1.2, 1.2)
+
 var score: int = 0:
 	set(val):
 		score = val
@@ -15,8 +18,8 @@ var lifes: int = 3:
 
 @onready var top_left: Marker2D = $TopLeft
 @onready var bottom_right: Marker2D = $BottomRight
-@onready var ball: CharacterBody2D = $BOBall
 @onready var player: CharacterBody2D = $Player
+@onready var ball_container: Node = $BallContainer
 
 @onready var score_label: Label = $ScoreLabel
 @onready var life_label: Label = $LifeLabel
@@ -25,13 +28,22 @@ var lifes: int = 3:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	put_bricks()
+#	new_ball()
+	print("ball out ", ball_container.get_child_count())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if Input.is_action_pressed("quit"):
 		get_tree().quit()
-	if ball.position.y > get_viewport().get_visible_rect().size.y:
-		ball_out()
+		
+	if Input.is_action_just_pressed("Player A UP"):
+		new_ball()	
+		
+	for ball in ball_container.get_children():
+		if ball.position.y > get_viewport().get_visible_rect().size.y:
+			ball.queue_free()
+			
+	check()
 
 func put_bricks():
 	var next_pos := top_left.position
@@ -52,12 +64,20 @@ func put_bricks():
 		if next_pos.y >= bottom_right.position.y:
 			break	
 
-func ball_out():
-	if lifes >= 1:
-		lifes -= 1
-		ball.init()
-		ball.position.x = player.position.x
+func check():
+	if ball_container.get_child_count() == 0:
+		if lifes >= 1:
+			lifes -= 1
+			new_ball()
+	if $Bricks.get_child_count() == 0:
+		put_bricks()
+
+func new_ball():
+	var ball := Ball.instantiate()
+	ball.position.x = player.position.x
+	ball_container.add_child(ball)
+	
 
 func _on_brick_destroyed(value):
 	score += value
-	ball.velocity *= 1.02
+#	ball.velocity *= 1.02

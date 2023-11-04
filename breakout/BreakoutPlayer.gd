@@ -18,6 +18,6 @@ func _physics_process(delta: float) -> void:
 		target_velocity += Vector2.RIGHT * speed
 
 	velocity = lerp(velocity, target_velocity, delta*10)
-	var collision = move_and_collide(velocity*delta)
+	var _collision = move_and_collide(velocity*delta)
 #	if collision:
 #		print(collision)
