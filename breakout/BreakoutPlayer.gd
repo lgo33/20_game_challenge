@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name BOPlayer
 
 var target_velocity: Vector2 = Vector2.ZERO
 const speed: int = 600

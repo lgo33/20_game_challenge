@@ -11,6 +11,7 @@ func _ready() -> void:
 	pass
 
 func destroy() -> void:
+	$CollisionPolygon2D.disabled = true
 	destroyed.emit(value)
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "scale", Vector2(0.2, 0.2), 0.3)

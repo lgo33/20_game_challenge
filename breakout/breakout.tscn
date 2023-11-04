@@ -38,7 +38,7 @@ position = Vector2(1088, 320)
 
 [node name="BallContainer" type="Node" parent="."]
 
-[node name="BOBall" parent="BallContainer" instance=ExtResource("3_ybupd")]
+[node name="BOBall" parent="BallContainer" groups=["Balls"] instance=ExtResource("3_ybupd")]
 position = Vector2(552, 480)
 scale = Vector2(0.6, 0.6)
 

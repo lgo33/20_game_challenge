@@ -74,10 +74,12 @@ func check():
 
 func new_ball():
 	var ball := Ball.instantiate()
-	ball.position.x = player.position.x
 	ball_container.add_child(ball)
+	ball.position.x = player.position.x
+	ball.add_to_group("Balls")
 	
 
 func _on_brick_destroyed(value):
 	score += value
+	get_tree().call_group("Balls", "bumb_speed", 1.02)
 #	ball.velocity *= 1.02
