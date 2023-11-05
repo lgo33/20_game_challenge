@@ -2,11 +2,12 @@ extends CharacterBody2D
 class_name BOPlayer
 
 var target_velocity: Vector2 = Vector2.ZERO
-const speed: int = 600
+const init_speed: int = 600
+var speed: int = 600
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	speed = init_speed # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -22,3 +23,7 @@ func _physics_process(delta: float) -> void:
 	var _collision = move_and_collide(velocity*delta)
 #	if collision:
 #		print(collision)
+
+func reset():
+	speed = init_speed
+	scale = Vector2(1, 1)

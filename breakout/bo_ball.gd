@@ -18,7 +18,7 @@ func _physics_process(delta: float) -> void:
 		blip.play()
 		var collider = collision.get_collider()
 		if collider is Brick:
-			collider.destroy()
+			collider.hit()
 		if velocity.y > 0 or not collider is CharacterBody2D:
 			velocity = velocity.bounce(collision.get_normal())
 			if collider is BOPlayer:

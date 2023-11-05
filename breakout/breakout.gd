@@ -51,8 +51,12 @@ func put_bricks():
 	for i in range(300):
 		var new_brick = Brick.instantiate() as Brick
 		$Bricks.add_child(new_brick)
+		new_brick.set_rand_type()
 		new_brick.scale = brick_size
 		new_brick.destroyed.connect(_on_brick_destroyed, 4)
+		new_brick.xball.connect(_on_xball, 4)
+		new_brick.fast_paddle.connect(_on_fast_paddle, 4)
+		new_brick.grow_paddle.connect(_on_grow_paddle, 4)
 #		new_brick.modulate = Color.RED
 		var shape: Vector2 = new_brick.get_shape() * brick_size
 		new_brick.position = next_pos + (shape/2.)
@@ -69,6 +73,7 @@ func check():
 		if lifes >= 1:
 			lifes -= 1
 			new_ball()
+			player.reset()
 	if $Bricks.get_child_count() == 0:
 		put_bricks()
 
@@ -83,3 +88,14 @@ func _on_brick_destroyed(value):
 	score += value
 	get_tree().call_group("Balls", "bumb_speed", 1.02)
 #	ball.velocity *= 1.02
+
+func _on_xball():
+	new_ball()
+
+func _on_fast_paddle():
+	print('fast paddle')
+	player.speed += 100
+	
+func _on_grow_paddle():
+	print('grow paddle')
+	player.scale.x *= 1.1
