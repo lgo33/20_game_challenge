@@ -11,4 +11,4 @@ func _process(_delta: float) -> void:
 	pass
 	
 func _draw() -> void:
-	draw_polyline(self.polygon, Color.BLACK, -1, true)
+	draw_polyline(self.polygon, Color.BLACK, -1, false)

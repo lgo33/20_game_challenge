@@ -5,6 +5,8 @@ var Ball: PackedScene = preload("res://breakout/bo_ball.tscn")
 
 var gap := 10.0
 var brick_size := Vector2(1.2, 1.2)
+var state: State = State.new()
+var save_file: String = "user://state.res"
 
 var score: int = 0:
 	set(val):
@@ -30,6 +32,10 @@ func _ready() -> void:
 	put_bricks()
 #	new_ball()
 	print("ball out ", ball_container.get_child_count())
+	if ResourceLoader.exists(save_file):
+		state = ResourceLoader.load(save_file)
+		print("loaded")
+	print("high score: ", state.highscore)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -75,7 +81,7 @@ func check():
 			new_ball()
 			player.reset()
 		else:
-			$GameOverLabel.visible = true
+			game_over()
 	if $Bricks.get_child_count() == 0:
 		put_bricks()
 
@@ -83,9 +89,9 @@ func new_ball():
 	var ball := Ball.instantiate()
 	ball_container.add_child(ball)
 	ball.position.x = player.position.x
+	ball.position.y = player.position.y - 20
 	ball.add_to_group("Balls")
 	
-
 func _on_brick_destroyed(value):
 	score += value
 	get_tree().call_group("Balls", "bumb_speed", 1.02)
@@ -95,9 +101,17 @@ func _on_xball():
 	new_ball()
 
 func _on_fast_paddle():
-	print('fast paddle')
 	player.inc_speed()
 	
 func _on_grow_paddle():
-	print('grow paddle')
 	player.grow()
+	
+func game_over() -> void:
+	if state.highscore < score:
+		state.highscore = score
+		var result = ResourceSaver.save(state, save_file)
+		print(result == OK)
+	$GameOverLabel.visible = true
+	$HighscoreLabel.text = "Highscore: " + str(state.highscore)
+	$HighscoreLabel.visible = true
+	

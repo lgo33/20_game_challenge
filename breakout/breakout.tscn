@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c5or8g0h0s2vl"]
+[gd_scene load_steps=10 format=3 uid="uid://c5or8g0h0s2vl"]
 
 [ext_resource type="Script" path="res://breakout/breakout.gd" id="1_loeyw"]
 [ext_resource type="PackedScene" uid="uid://dq6frxatfsa4q" path="res://breakout/player.tscn" id="1_o2f12"]
@@ -17,6 +17,10 @@ font_size = 48
 [sub_resource type="LabelSettings" id="LabelSettings_lwpo2"]
 font = ExtResource("5_urxp3")
 font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_h71ok"]
+font = ExtResource("5_urxp3")
+font_size = 48
 
 [node name="Breakout" type="Node2D"]
 script = ExtResource("1_loeyw")
@@ -71,6 +75,17 @@ visible = false
 offset_left = 328.0
 offset_top = 336.0
 offset_right = 784.0
-offset_bottom = 466.0
+offset_bottom = 411.0
 text = "Game Over"
 label_settings = SubResource("LabelSettings_lwpo2")
+horizontal_alignment = 1
+
+[node name="HighscoreLabel" type="Label" parent="."]
+visible = false
+offset_left = 256.0
+offset_top = 416.0
+offset_right = 855.0
+offset_bottom = 491.0
+text = "- high score -"
+label_settings = SubResource("LabelSettings_h71ok")
+horizontal_alignment = 1

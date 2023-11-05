@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://dq6frxatfsa4q"]
+[gd_scene load_steps=5 format=3 uid="uid://dq6frxatfsa4q"]
 
 [ext_resource type="Script" path="res://breakout/BreakoutPlayer.gd" id="1_6o5ay"]
 [ext_resource type="Script" path="res://breakout/Polygon2D.gd" id="1_6t3nl"]
+[ext_resource type="FontFile" uid="uid://c1t3cxajvt3kr" path="res://shared_assets/kenvector_future_font.ttf" id="3_d5l02"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_olmh8"]
+font = ExtResource("3_d5l02")
+font_size = 32
 
 [node name="BreakoutPlayer" type="CharacterBody2D"]
 collision_layer = 4
@@ -14,3 +19,20 @@ polygon = PackedVector2Array(-50, -12, 50, -12, 80, -8, 80, 8, 50, 12, -50, 12, 
 color = Color(1, 0.309804, 0.0431373, 1)
 polygon = PackedVector2Array(-50, -12, 50, -12, 80, -8, 80, 8, 50, 12, -50, 12, -80, 8, -80, -8, -50, -12)
 script = ExtResource("1_6t3nl")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -136.0
+offset_top = -48.0
+offset_right = 136.0
+offset_bottom = -9.0
+text = "Testing"
+label_settings = SubResource("LabelSettings_olmh8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelTimer" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
+
+[connection signal="timeout" from="LabelTimer" to="." method="_on_label_timer_timeout"]

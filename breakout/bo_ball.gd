@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var init_speed := 400
 @export var ball_scale := 0.5
 var speed := init_speed
+var max_speed := 1000
 @onready var blip: AudioStreamPlayer2D = $blip
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var disable_collision_timer: Timer = $DisableCollisionTimer
@@ -35,7 +36,8 @@ func init() -> void:
 	velocity = Vector2(randf_range(-100, 100), -100).normalized() * speed
 	
 func bumb_speed(factor):
-	velocity *= factor
+	if velocity.length() < max_speed:
+		velocity *= factor
 	
 func _on_disable_collision_timer_timeout() -> void:
 	set_collision_mask_value(3, true)
