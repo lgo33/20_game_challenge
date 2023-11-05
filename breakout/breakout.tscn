@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5or8g0h0s2vl"]
+[gd_scene load_steps=9 format=3 uid="uid://c5or8g0h0s2vl"]
 
 [ext_resource type="Script" path="res://breakout/breakout.gd" id="1_loeyw"]
 [ext_resource type="PackedScene" uid="uid://dq6frxatfsa4q" path="res://breakout/player.tscn" id="1_o2f12"]
 [ext_resource type="PackedScene" uid="uid://dyw8aa2lc7eam" path="res://breakout/bo_ball.tscn" id="3_ybupd"]
 [ext_resource type="FontFile" uid="uid://cm5oe5k1oc4q6" path="res://flappy_bird/assets/kenvector_future.ttf" id="4_nycy1"]
+[ext_resource type="FontFile" uid="uid://c1t3cxajvt3kr" path="res://shared_assets/kenvector_future_font.ttf" id="5_urxp3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gtrh4"]
 font = ExtResource("4_nycy1")
@@ -12,6 +13,10 @@ font_size = 48
 [sub_resource type="LabelSettings" id="LabelSettings_f48yb"]
 font = ExtResource("4_nycy1")
 font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_lwpo2"]
+font = ExtResource("5_urxp3")
+font_size = 64
 
 [node name="Breakout" type="Node2D"]
 script = ExtResource("1_loeyw")
@@ -60,3 +65,12 @@ offset_right = 136.0
 offset_bottom = 73.0
 text = "3"
 label_settings = SubResource("LabelSettings_f48yb")
+
+[node name="GameOverLabel" type="Label" parent="."]
+visible = false
+offset_left = 328.0
+offset_top = 336.0
+offset_right = 784.0
+offset_bottom = 466.0
+text = "Game Over"
+label_settings = SubResource("LabelSettings_lwpo2")

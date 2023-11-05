@@ -74,6 +74,8 @@ func check():
 			lifes -= 1
 			new_ball()
 			player.reset()
+		else:
+			$GameOverLabel.visible = true
 	if $Bricks.get_child_count() == 0:
 		put_bricks()
 
@@ -94,8 +96,8 @@ func _on_xball():
 
 func _on_fast_paddle():
 	print('fast paddle')
-	player.speed += 100
+	player.inc_speed()
 	
 func _on_grow_paddle():
 	print('grow paddle')
-	player.scale.x *= 1.1
+	player.grow()

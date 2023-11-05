@@ -4,6 +4,8 @@ class_name BOPlayer
 var target_velocity: Vector2 = Vector2.ZERO
 const init_speed: int = 600
 var speed: int = 600
+var max_speed := 1000
+var max_scale := 2.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -23,6 +25,15 @@ func _physics_process(delta: float) -> void:
 	var _collision = move_and_collide(velocity*delta)
 #	if collision:
 #		print(collision)
+
+func inc_speed():
+	if speed < max_speed:
+		speed += 100
+
+func grow():
+	if scale.x < max_scale:
+		scale.x *= 1.1
+
 
 func reset():
 	speed = init_speed
